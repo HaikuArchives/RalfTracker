@@ -34,6 +34,11 @@
 
 #include <string.h>
 
+#include <Directory.h>
+#include <File.h>
+#include <Alert.h>
+#include <MenuItem.h>
+
 #include "CTrackerApp.h"
 
 #include "TrackerMessages.h"
@@ -42,7 +47,7 @@
 #include "CFileItem.h"
 
 //********************************
-CTrackerApp::CTrackerApp(ulong sign) : BApplication(sign)
+CTrackerApp::CTrackerApp(ulong sign) : BApplication("")
 //********************************
 {
 	//mTrackerLooper = NULL;
@@ -62,8 +67,8 @@ CTrackerApp::CTrackerApp(ulong sign) : BApplication(sign)
 	createAppMenu();
 
 	// create the audio subscriber
-	mPlayer = new BAudioSubscriber("TrackerPlayer");
-	if (mPlayer)
+	//mPlayer = new BAudioSubscriber("TrackerPlayer");
+	/*if (mPlayer)
 	{
 		long error;
 		error = mPlayer->Subscribe(B_DAC_STREAM,B_INVISIBLE_SUBSCRIBER_ID,TRUE);
@@ -77,7 +82,7 @@ CTrackerApp::CTrackerApp(ulong sign) : BApplication(sign)
 		error = mPlayer->GetStreamParameters(&bufSize, &bufCount, &isRunning, &subCount, &clique);
 		
 		error = mPlayer->EnterStream(NULL, FALSE, NULL,trackerStreamPlay, NULL, TRUE);
-	}
+	}*/
 	//<<<******
 }
 
@@ -89,8 +94,8 @@ CTrackerApp::~CTrackerApp(void)
 long i,n;
 
 	dprintf("deleting audio subscriber\n");
-	if (mPlayer) delete mPlayer;
-	mPlayer = NULL;
+	//if (mPlayer) delete mPlayer;
+	//mPlayer = NULL;
 
 	dprintf("delete tracker task\n");
 	if (mTrackerLooper) mTrackerLooper->Quit();
@@ -149,13 +154,13 @@ void CTrackerApp::RefsReceived(BMessage *msg)
 BOOL succeed = FALSE;
 ULONG type, i;
 LONG count;
-record_ref item;
+entry_ref item;
 
 	if (!msg) return;
 	msg->GetInfo("refs", &type, &count);
 	for(i = 0; i < count; i++)
 	{
-		item = msg->FindRef("refs", i);
+		msg->FindRef("refs", i, &item);
 		if (item.database >= 0 && item.record >= 0)
 			if (does_ref_conform(item, "File")) {
 				addFileToList(item);
@@ -250,7 +255,7 @@ void CTrackerApp::uglyAboutBox(void)
 
 
 //********************************
-void CTrackerApp::addFileToList(record_ref ref)
+void CTrackerApp::addFileToList(entry_ref ref)
 //********************************
 {
 	if (does_ref_conform(ref, "Folder"))
@@ -334,7 +339,7 @@ void CTrackerApp::addFileToList(record_ref ref)
 
 
 //********************************
-void CTrackerApp::addDirectoryToList(record_ref ref)
+void CTrackerApp::addDirectoryToList(entry_ref ref)
 //********************************
 {
 	if (does_ref_conform(ref, "File"))

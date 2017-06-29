@@ -35,9 +35,11 @@
 #ifndef CTRACKER_WIN_H
 #define CTRACKER_WIN_H
 
+#include <Window.h>
+#include <StringView.h>
+
 #include "CFileList.h"
 #include "CElectrogramme.h"
-
 
 
 //*************************************

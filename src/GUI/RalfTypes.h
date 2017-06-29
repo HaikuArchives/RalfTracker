@@ -37,7 +37,7 @@
 #define RALF_TYPES_H
 
 
-#define BOOL unsigned char
+#define BOOL bool
 #define ULONG unsigned long
 #define LONG signed long
 #define UBYTE unsigned char

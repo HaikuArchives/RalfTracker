@@ -36,6 +36,9 @@
 #ifndef CELECTROGRAMME_H
 #define CELECTROGRAMME_H
 
+#include <Rect.h>
+#include <View.h>
+
 #include "RalfTypes.h"
 
 //*********************************
@@ -54,7 +57,7 @@ public:
 	void Pulse(void);
 	void FrameResized(float width, float height);
 	
-	ULONG mAllocWidth;	// alloc size of the array
+	int32 mAllocWidth;	// alloc size of the array
 	SHORT *mValue;
 	BOOL mRightChannel;
 };

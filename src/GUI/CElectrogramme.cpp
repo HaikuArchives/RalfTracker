@@ -33,6 +33,7 @@
 ***********************************************************/
 
 #include <string.h>
+#include <algorithm>
 
 #include "CElectrogramme.h"
 #include "RalfTypes.h"
@@ -53,7 +54,7 @@ CElectrogramme::CElectrogramme(BRect frame, const char *name, BOOL rightChannel,
 //********************************
 {
 	mRightChannel = rightChannel;
-	mAllocWidth = max(200,frame.Width());
+	mAllocWidth = std::max((int32)200,frame.IntegerWidth());
 	mValue = new SHORT[mAllocWidth];
 	if (!mValue) mAllocWidth = 0;
 	else memset(mValue, 0, sizeof(SHORT)*mAllocWidth);
@@ -98,7 +99,7 @@ void CElectrogramme::Draw(BRect r)
 // be sure this is not efficient at all. Ou presque.
 {
 register ULONG nbuf;
-register ULONG w,h;
+register int32 w,h;
 register ULONG i;
 rgb_color backgroundColor = {K_ELECTRO_GRAY};
 rgb_color liveColor = {K_ELECTRO_GREEN};
@@ -107,7 +108,7 @@ register SBufferItem *item;
 
 	if (!Window() || !Window()->Lock()) return;
 
-	w = min(Bounds().Width(), mAllocWidth);
+	w = std::min(Bounds().IntegerWidth(), mAllocWidth);
 	h = Bounds().Height();
 
 	// first eraase the current data buffer

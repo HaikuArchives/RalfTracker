@@ -36,6 +36,8 @@
 #ifndef CFILE_LIST_H
 #define CFILE_LIST_H
 
+#include <ListView.h>
+
 #include "RalfTypes.h"
 
 //*************************************

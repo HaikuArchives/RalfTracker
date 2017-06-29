@@ -32,7 +32,7 @@
 
 ***********************************************************/
 
-
+#include <Application.h>
 
 #include "CFileList.h"
 
@@ -42,7 +42,7 @@
 CFileList::CFileList(BRect frame, char *name,
 						ULONG resizeMode,
 						ULONG flags)
-					:BListView(frame,name,resizeMode,flags)
+					:BListView(frame,name,B_SINGLE_SELECTION_LIST,resizeMode,flags)
 //*************************************
 {
 }

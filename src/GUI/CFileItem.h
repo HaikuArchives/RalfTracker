@@ -36,6 +36,8 @@
 #ifndef CFILE_ITEM_H
 #define CFILE_ITEM_H
 
+#include <SupportDefs.h>
+
 #include "RalfTypes.h"
 
 //****************

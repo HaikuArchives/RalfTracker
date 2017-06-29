@@ -35,6 +35,13 @@
 #ifndef CTRACKER_APP_H
 #define CTRACKER_APP_H
 
+#include <Application.h>
+#include <Message.h>
+#include <Locker.h>
+#include <List.h>
+#include <PopUpMenu.h>
+#include <Entry.h>
+
 #include "RalfTypes.h"
 #include "CTrackerLooper.h"
 #include "CTrackerWin.h"
@@ -60,7 +67,7 @@ public:
 
 	CTrackerLooper *mTrackerLooper;
 	CTrackerWin *mWindow;
-	BAudioSubscriber *mPlayer;
+	//BAudioSubscriber *mPlayer;
 	BLocker mBufferLock;
 	BList mBufferList;	// a list of SBufferItem ptrs to be played
 	BList mFileList;		// a list of CFileItem ptrs to be selected
@@ -68,8 +75,8 @@ public:
 
 	ULONG mInstantRightVolume, mInstantLeftVolume;
 
-	void addFileToList(record_ref ref);
-	void addDirectoryToList(record_ref ref);
+	void addFileToList(entry_ref ref);
+	void addDirectoryToList(entry_ref ref);
 
 	void playList(void);
 	void playNext(void);
